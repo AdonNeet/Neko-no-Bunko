@@ -1,5 +1,7 @@
 # Sensitive Data
-.env
+/.env
+/vendor
+/storage
 
 # Idea
 note.*
