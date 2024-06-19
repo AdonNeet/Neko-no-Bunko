@@ -1,0 +1,9 @@
+# Sensitive Data
+.env
+
+# Idea
+note.*
+idea.*
+
+# Another
+cek.*
