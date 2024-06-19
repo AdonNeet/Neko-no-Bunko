@@ -1,13 +1,17 @@
 <?php
 $config = require __DIR__ . '/config.php';
 
-try {
-    $dsn = "mysql:host=" . $config['db']['host'] . ";port=" . $config['db']['port'] . ";dbname=" . $config['db']['database'];
-    $pdo = new PDO($dsn, $config['db']['username'], $config['db']['password']);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die('Database connection failed: ' . $e->getMessage());
+$host = $config['db']['host'];
+$port = $config['db']['port'];
+$database = $config['db']['database'];
+$username = $config['db']['username'];
+$password = $config['db']['password'];
+
+$conn = mysqli_connect($host, $username, $password, $database, $port);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 
-return $pdo;
+return $conn;
 ?>
