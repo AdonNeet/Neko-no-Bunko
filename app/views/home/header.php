@@ -12,13 +12,39 @@
         .jumbotron {
             background-color: #FFA500;
             color: #000;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .jumbotron .display-4 {
+            font-weight: bold; 
         }
         .about-us, .faq {
             padding: 60px 0;
         }
+        .about-us .card {
+            margin: 20px;
+        }
         .footer {
             background-color: #f8f9fa;
             padding: 20px 0;
+        }
+        .faq .card {
+            border: none; /* Remove border */
+            align-items: center;
+        }
+        .faq .card-header {
+            background-color: transparent; /* Remove background color of header */
+        }
+        .faq .card-header .btn {
+            color: #000; /* Change button text color */
+        }
+        .faq .card-body {
+            background-color: transparent; /* Change card body background color */
+            color: #000; /* Change card body text color */
         }
     </style>
 </head>
