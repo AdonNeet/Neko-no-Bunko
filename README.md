@@ -1,4 +1,4 @@
-# Neko-no-Bunko
+# Neko-no-Bunko -> (Known as BuBar)
 
 Aplikasi perpustakaan web berbasis PHP Native yang dibuat dengan tujuan untuk memenuhi tugas akhir praktikum web.
 
