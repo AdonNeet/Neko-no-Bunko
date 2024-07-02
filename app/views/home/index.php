@@ -8,8 +8,8 @@
 
 <div class="container" id="bubar-section">
     <h2 class="text-center my-4">BuBar</h2>
-    <p>BuBar adalah sebuah website yang dibuat bertujuan untuk memudah kita dalam meminjam buku tanpa harus datang dan mengantri. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p>BuBar adalah sebuah platform perpustakaan online yang dirancang dengan tujuan untuk memudahkan proses peminjaman buku, sehingga para pengguna tidak perlu datang secara fisik ke perpustakaan dan mengantri untuk mendapatkan buku yang diinginkan. Dengan BuBar, pengguna dapat mengakses berbagai koleksi buku dari kenyamanan rumah mereka sendiri, meminjam buku secara digital, dan menikmati pengalaman membaca tanpa hambatan waktu dan jarak.</p>
+    <p>BuBar hadir sebagai solusi inovatif bagi para pecinta buku yang ingin mengoptimalkan waktu mereka dengan cara yang efisien dan praktis, serta berkontribusi pada peningkatan budaya membaca di era digital. Platform ini menawarkan kemudahan pencarian buku, peminjaman dengan beberapa klik, serta pengelolaan pinjaman yang terorganisir, menjadikan BuBar sebagai pilihan ideal bagi siapa saja yang ingin menikmati kemudahan dan fleksibilitas dalam mengakses berbagai literatur.</p>
 </div>
 
 <div class="container about-us text-center" id="about-us">
@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card">
-                <img src="dummy.jpg" class="card-img-top" alt="Foto">
+                <img src="dumy.jpg" class="card-img-top" alt="Foto">
                 <div class="card-body">
                     <p class="card-text">Nama: As'ad Nirot Ahmadi</p>
                     <p class="card-text">NIM: L200220155</p>
@@ -26,19 +26,19 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="dummy.jpg" class="card-img-top" alt="Foto">
+                <img src="dumy.jpg" class="card-img-top" alt="Foto">
                 <div class="card-body">
-                    <p class="card-text">Nama: As'ad Nirot Ahmadi</p>
-                    <p class="card-text">NIM: L200220155</p>
+                    <p class="card-text">Nama: Iqbal Firmansyah</p>
+                    <p class="card-text">NIM: L200220180</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="dummy.jpg" class="card-img-top" alt="Foto">
+                <img src="dumy.jpg" class="card-img-top" alt="Foto">
                 <div class="card-body">
-                    <p class="card-text">Nama: As'ad Nirot Ahmadi</p>
-                    <p class="card-text">NIM: L200220155</p>
+                    <p class="card-text">Nama: Bara Donta Perdana</p>
+                    <p class="card-text">NIM: L200220194</p>
                 </div>
             </div>
         </div>
