@@ -1,4 +1,3 @@
-// migrations/create_user_table.php
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
