@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config/database.php';
+# srequire_once __DIR__ . '/../config/database.php';
 $routes = require __DIR__ . '/../config/routes.php';
 
 // Simple Router

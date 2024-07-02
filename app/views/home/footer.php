@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h5>Quick Links</h5>
+                <h4>Quick Links</h4>
                 <ul class="list-unstyled">
                     <li><a href="#main">Home</a></li>
                     <li><a href="#">Books</a></li>
@@ -11,7 +11,7 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <h5>Contact Info</h5>
+                <h4>Contact Info</h4>
                 <ul class="list-unstyled">
                     <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=askbubar@gmail.com">askbubar@gmail.com</a></li>
                     <li>Universitas Muhammadiyah Surakarta</li>
