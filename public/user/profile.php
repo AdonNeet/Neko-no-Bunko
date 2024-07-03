@@ -1,3 +1,18 @@
+<?php
+
+require_once __DIR__ . '/../../config/database.php';
+
+
+session_start();
+
+// jika belum login maka diarahkan ke halaman login
+if( !isset($_SESSION["login"]) ) {
+    header("Location: /../auth");
+    exit;
+}
+
+?>
+
 <?php include('header.php'); ?>
 <body>
   <div class="container-fluid">

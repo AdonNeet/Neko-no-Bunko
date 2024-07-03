@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/64d58efce2.js"></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="auth/style_auth.css" />
     <title>BuBar Auth</title>
 </head>
 <body>
@@ -82,6 +82,6 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="auth/app.js"></script>
 </body>
 </html>
