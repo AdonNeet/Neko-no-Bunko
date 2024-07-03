@@ -49,7 +49,7 @@ if( !isset($_SESSION["login"]) ) {
         <?php
         if(isset($_POST['submit'])){
             $search_item = $_POST['search'];
-            $select_books = mysqli_query($conn, "SELECT * FROM buku WHERE judul LIKE '%{$search_item}%'") or die('query failed');
+            $select_books = mysqli_query($conn, "SELECT b.*, k.nama_kategori AS kategori FROM buku b JOIN kategori k ON b.id_kategori = k.id_kategori WHERE b.judul LIKE '%{$search_item}%' OR k.nama_kategori LIKE '%{$search_item}%'") or die('query failed');
             if(mysqli_num_rows($select_books) > 0){
                 while($data = mysqli_fetch_assoc($select_books)){
         ?>
