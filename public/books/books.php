@@ -71,9 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             while($data = mysqli_fetch_assoc($select_books)){
                 ?>
 
-        <form action="books.php" method="post" class="box">
-            <img class="image" src="/../resource/img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)">
-            <div class="name"><?php echo $data['judul']; ?></div>
+         
+        <form action="books.php" method="post" class="box" >
             <input type="hidden" name="id_buku" value="<?php echo $data['id_buku']; ?>">
             <a href="book_detail.php?id_buku=<?php $data['id_buku']; ?>">
                 <img class="image" src="/../resource/img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)" >
