@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../../config/database.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +14,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- Custom admin CSS file link  -->
-   <link rel="stylesheet" href="css/style_admin.css">
+   <link rel="stylesheet" href="style_admin.css">
    <link rel="icon" type="image/png" href="images/books.png">
 
 </head>
@@ -29,25 +33,20 @@
             <th>Nama Buku</th>
             <th>Nama User</th>
             <th>Tanggal Pinjam</th>
-            <th>Tanggal Kembali</th>
-            <th class="end">Actions</th>
+            <th class="end">Tanggal Kembali</th>
          </tr>
       </thead>
       <tbody>
          <?php
-            $select_peminjaman = mysqli_query($conn, "SELECT peminjaman.id_peminjaman, buku.judul, user.nama, peminjaman.tanggal_pinjam, peminjaman.tanggal_kembali FROM `peminjaman` JOIN `buku` ON peminjaman.id_buku = buku.id_buku JOIN `user` ON peminjaman.id_user = user.id_user") or die('Query failed');
+            $select_peminjaman = mysqli_query($conn, "SELECT peminjaman.id_pinjam, user.nama, buku.judul, tanggal_pinjam, tanggal_kembali FROM `peminjaman` JOIN `buku` ON peminjaman.id_buku = buku.id_buku JOIN `user` ON peminjaman.id_user = user.id_user") or die('Query failed');
             while($row = mysqli_fetch_assoc($select_peminjaman)){
          ?>
          <tr>
-            <td class="kanan"><?php echo $row['id_peminjaman']; ?></td>
+            <td class="kanan"><?php echo $row['id_pinjam']; ?></td>
             <td><?php echo $row['judul']; ?></td>
             <td><?php echo $row['nama']; ?></td>
             <td class="mid"><?php echo $row['tanggal_pinjam']; ?></td>
             <td class="mid"><?php echo $row['tanggal_kembali']; ?></td>
-            <td class="end">
-               <a href="admin_peminjaman.php?update=<?php echo $row['id_peminjaman']; ?>" class="action-btn option-btn">Update</a>
-               <a href="admin_peminjaman.php?delete=<?php echo $row['id_peminjaman']; ?>" onclick="return confirm('Delete this entry?');" class="action-btn delete-btn">Delete</a>
-            </td>
          </tr>
          <?php
             }
@@ -55,21 +54,6 @@
       </tbody>
    </table>
    </div>
-
-   <?php if 
-   (isset($peminjaman_data)) { ?>
-      <form action="admin_peminjaman.php" method="post" class="update-form" id="update-peminjaman">
-         <h3>Update:</h3>
-         <input type="hidden" name="id_peminjaman" value="<?php echo $peminjaman_data['id_peminjaman']; ?>">
-         <p> ID Buku: <input type="text" name="id_buku" value="<?php echo $peminjaman_data['id_buku']; ?>" readonly> </p>
-         <p> ID User: <input type="text" name="id_user" value="<?php echo $peminjaman_data['id_user']; ?>" readonly> </p>
-         <p> Tanggal Pinjam: <input type="date" name="tanggal_pinjam" value="<?php echo $peminjaman_data['tanggal_pinjam']; ?>" readonly> </p>
-         <p> Tanggal Kembali: <input type="date" name="tanggal_kembali" value="<?php echo $peminjaman_data['tanggal_kembali']; ?>" required> </p>
-         <a name="update_peminjaman" class="option-btn">Update</a>
-         <a id="close-update" class="delete-btn" onclick="window.location.href='admin_peminjaman.php';">Cancel</a>
-         <script>window.location.href='#update-peminjaman';</script>
-      </form>
-   <?php } ?>
 
 </section>
 
