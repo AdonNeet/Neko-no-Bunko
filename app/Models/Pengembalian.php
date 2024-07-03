@@ -16,9 +16,9 @@ class Pengembalian
     {
         $pengembalianData = PengembalianFactory::create($attributes);
 
-        $sql = "INSERT INTO pengembalian (id_pengembalian, id_pinjam, tanggal_pengembalian, denda) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO pengembalian (id_pinjam, tanggal_pengembalian, denda) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param('iisi', $pengembalianData['id_pengembalian'], $pengembalianData['id_pinjam'], $pengembalianData['tanggal_pengembalian'], $pengembalianData['denda']);
+        $stmt->bind_param('isi', $pengembalianData['id_pinjam'], $pengembalianData['tanggal_pengembalian'], $pengembalianData['denda']);
 
         if ($stmt->execute()) {
             echo "Pengembalian record created successfully.\n";
