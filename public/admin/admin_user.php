@@ -1,6 +1,14 @@
 <?php
 require_once __DIR__ . '/../../config/database.php';
 
+
+session_start();
+
+if (!isset($_SESSION["role"])) {
+  header("Location: /../auth");
+  exit;
+}
+
 // Handle delete action
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];

@@ -1,21 +1,13 @@
 <?php
 require_once __DIR__ . '/../../config/database.php';
 
-// session_start();
 
-// // jika bukan admin diarahkan ke halaman user
-// if( isset($_SESSION["login"]) ) {
-//     if ($_SESSION['id_user'] !== 1) {
-//         header("Location: index.php");
-//     }
-// }
+session_start();
 
-
-// jika belum login maka diarahkan ke halaman login
-// if( !isset($_SESSION["login"]) ) {
-//     header("Location: login.php");
-//     exit;
-// }
+if (!isset($_SESSION["role"])) {
+  header("Location: /../auth");
+  exit;
+}
 
 if (isset($_POST['add_book'])) {
     $id_buku = mysqli_real_escape_string($conn, $_POST['id_buku']);

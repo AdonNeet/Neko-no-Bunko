@@ -60,7 +60,7 @@ class AuthController
                 echo "Login successful!";
                 header('Location: /../user/profile.php');
             } else {
-                $_SESSION['user_id'] = $akun['id_akun'];
+                $_SESSION['role'] = $akun['role'];
                 echo "Login successful!";
                 header('Location: /../admin/admin_index.php');
             }
