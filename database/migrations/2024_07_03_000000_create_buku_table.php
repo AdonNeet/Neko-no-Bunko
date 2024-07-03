@@ -6,7 +6,7 @@ $conn = require __DIR__ . '/../../config/database.php';
 
 $sql = "
 CREATE TABLE IF NOT EXISTS buku (
-    id_buku varchar(10) NOT NULL,
+    id_buku varchar(10) NOT NULL PRIMARY KEY,
     id_kategori varchar(10) NOT NULL,
     judul varchar(255) NOT NULL,
     penulis varchar(255) NOT NULL,

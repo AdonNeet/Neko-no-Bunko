@@ -14,7 +14,7 @@ class PeminjamanTableSeeder
         ];
 
         foreach ($peminjaman as $pinjamData) {
-            $sql = "INSERT INTO peminjaman (id_user, id_buku, tanggal_pinjam, tanggal_kembali) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO peminjaman (id_user, id_buku, tanggal_pinjam, tanggal_kembali) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param('ssss', $pinjamData['id_user'], $pinjamData['id_buku'], $pinjamData['tanggal_pinjam'], $pinjamData['tanggal_kembali']);
 
