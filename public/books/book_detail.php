@@ -21,6 +21,7 @@ $userModel = new User();
 // Mengambil data akun dan user berdasarkan id_akun
 $akun = $akunModel->find($id_akun);
 $user = $userModel->findByAkunId($id_akun);
+
 include('header.php'); ?>
 <!-- <body>
     <section style="margin-bottom: 10vh">
