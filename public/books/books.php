@@ -67,16 +67,18 @@ require_once __DIR__ . '/../../config/database.php';
     <div style="text-align:center;">
         <h2 class="title">latest books</h2>
     </div>
-    <div class="box-container">
-
+    <div class="box-container" href="book_detail.php">
         <?php  
         $select_books = mysqli_query($conn, "SELECT * FROM buku ORDER BY buku.tahun_terbit DESC") or die('query failed');
         if(mysqli_num_rows($select_books) > 0){
-                while($data = mysqli_fetch_assoc($select_books)){
-        ?>
+            while($data = mysqli_fetch_assoc($select_books)){
+                ?>
 
-        <form action="books.php" method="post" class="box">
-            <img class="image" src="/../resource/img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)">
+         
+        <form action="books.php" method="post" class="box" >
+            <a href="book_detail.php?id_buku=<?php $_POST['id_buku']; ?>">
+                <img class="image" src="/../resource/img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)" >
+            </a>
             <div class="name"><?php echo $data['judul']; ?></div>
             <input type="hidden" name="id_buku" value="<?php echo $data['id_buku']; ?>">
             <div class="details">
@@ -103,7 +105,7 @@ require_once __DIR__ . '/../../config/database.php';
         }
         ?>
     </div>
-
+    
     <div class="load-more" style="margin-top: 2rem; text-align:center">
         <a href="" class=""></a>
     </div>

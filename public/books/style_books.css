@@ -62,13 +62,19 @@ section{
    font-size: 1.8rem;
    border-radius: .5rem;
    text-transform: capitalize;
+   background-color: var(--purple);
 }
-
-.btn:hover,
-.option-btn:hover,
-.delete-btn:hover{
-   background-color: var(--black);
-}
+ 
+ .btn:hover,
+ .delete-btn:hover{
+    background-color: var(--orange);
+ }
+ 
+ .btn-disabled{
+     pointer-events: none;
+     opacity: .7;
+     user-select: none;
+ }
 
 /* BOOKS - START */
 .books .box-container {
