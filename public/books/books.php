@@ -84,14 +84,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="publisher"><span>Penerbit:</span> <?php echo $data['penerbit']; ?></div>
                     <div class="year"><span>Terbit:</span> <?php echo $data['tahun_terbit']; ?></div>
                 </div>
-                <div class="stock">Stok: 
-                    <?php if ($data['jumlah_halaman'] > 0) {
-                        echo "<span>Tersedia</span>";
-                    } else {
-                        echo "<span class='kosong'>Kosong</span>";
-                    }
-                    ?>
-                </div>
             </div>
             <input type="submit" value="Pinjam" name="submit" class="btn" onclick="return confirmSubmit();">
         </form>

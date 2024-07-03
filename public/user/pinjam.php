@@ -26,8 +26,36 @@ $query = "SELECT * FROM peminjaman WHERE id_user = '$id_user'";
 
 $result = mysqli_query($conn, $query);
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    date_default_timezone_set('Asia/Jakarta');
+    
+    $id_pinjam = $_POST['id_pinjam'];
+    $tgl_pinjam = $_POST['tanggal_pinjam']; // format: Y-m-d H:i:s
+    $start_date = new DateTime($tgl_pinjam);
+    $current_date = new DateTime();
+    $interval = $current_date->diff($start_date);
+    $hari = $interval->days;
+    $denda = $hari * 3000;
+    $current_date_str = $current_date->format('Y-m-d H:i:s');
+    $query = "INSERT INTO pengembalian (id_pinjam, tanggal_pengembalian, denda) VALUES (?, ?, ?)";
 
+    if ($stmt = mysqli_prepare($conn, $query)) {
+        mysqli_stmt_bind_param($stmt, "isi", $id_pinjam, $current_date_str, $denda);
+        if (mysqli_stmt_execute($stmt)) {
+            // echo "Data berhasil ditambahkan.";
+        } else {
+            echo "Error: " . mysqli_stmt_error($stmt);
+        }
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
 
+    $query = "UPDATE peminjaman SET tanggal_kembali = '$current_date_str' WHERE id_pinjam = '$id_pinjam'";
+    $run = mysqli_query($conn, $query);
+
+    header('Location: pinjam.php');
+}
 ?>
 
 <?php include('header.php'); ?>
@@ -57,10 +85,14 @@ $result = mysqli_query($conn, $query);
               <?php $nomer = 1; while ($row = mysqli_fetch_assoc($result)): ?>
                 <tr>
                 <form method="POST" action="pinjam.php">
+                  <input type="hidden" name="id_pinjam" value="<?php echo $row['id_pinjam']; ?>">
+                  <input type="hidden" name="tanggal_pinjam" value="<?php echo $row['tanggal_pinjam']; ?>">
                   <th scope="row"><?php echo $nomer++; ?></th>
                   <td><?php echo $row['id_buku']; ?></td>
                   <td><?php echo $row['tanggal_pinjam']; ?></td>
-                  <td><button type="submit" class="btn btn-danger">Kembalikan</button></td>
+                  <?php if($row['tanggal_kembali'] == NULL) { ?>
+                    <td><button type="submit" class="btn btn-danger">Kembalikan</button></td>
+                  <?php } ?>
                 </form>
                 </tr>
               <?php endwhile; ?>

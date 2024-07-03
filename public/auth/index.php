@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="social-media">
                     </div>
                 </form>
-                <form action="auth/index.php" class="sign-up-form" method="POST">
+                <form action="index.php" class="sign-up-form" method="POST">
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>

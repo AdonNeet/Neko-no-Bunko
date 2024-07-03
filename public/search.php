@@ -1,14 +1,41 @@
 <?php
 
 require_once __DIR__ . '/../config/database.php';
-
+require_once __DIR__ . '/../app/models/Akun.php';
+require_once __DIR__ . '/../app/models/User.php';
 
 session_start();
 
 // jika belum login maka diarahkan ke halaman login
-if( !isset($_SESSION["login"]) ) {
-    header("Location: auth");
+if (!isset($_SESSION["user_id"])) {
+    header("Location: /../auth/");
     exit;
+}
+
+// Mengambil id_akun dari session
+$id_akun = $_SESSION["user_id"];
+
+// Membuat instance dari model Akun dan User
+$akunModel = new Akun();
+$userModel = new User();
+
+// Mengambil data akun dan user berdasarkan id_akun
+$akun = $akunModel->find($id_akun);
+$user = $userModel->findByAkunId($id_akun);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if($_POST['Pinjam'] == true) {
+        $id_user = $user['id_user'];
+        $id_buku = $_POST['id_buku'];
+        $current_date = (new DateTime())->format('Y-m-d H:i:s');
+
+        $query = "INSERT INTO peminjaman (id_user, id_buku, tanggal_pinjam) VALUES ('$id_user', '$id_buku', '$current_date')";
+        if (mysqli_query($conn, $query)) {
+            echo "Data berhasil ditambahkan.";
+        } else {
+            echo "Error: " . $query . "<br>" . mysqli_error($conn);
+        }
+    }  ;
 }
 
 ?>
@@ -53,41 +80,21 @@ if( !isset($_SESSION["login"]) ) {
             if(mysqli_num_rows($select_books) > 0){
                 while($data = mysqli_fetch_assoc($select_books)){
         ?>
-        <form action="books.php" method="post" class="box">
-            <img class="image" src="uploaded_img/<?php echo $data['foto']; ?>" alt="">
-            <div class="name"><?php echo $data['judul']; ?></div>
+        <form action="search.php" method="post" class="box" >
             <input type="hidden" name="id_buku" value="<?php echo $data['id_buku']; ?>">
+            <input type="hidden" name="pinjamBuku" value="<?php echo true; ?>">
+            <a href="book_detail.php?id_buku=<?php $data['id_buku']; ?>">
+                <img class="image" src="/../resource/img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)" >
+            </a>
+            <div class="name"><?php echo $data['judul']; ?></div>
             <div class="details">
                 <div class="info">
                     <div class="author"><span>Penulis:</span> <?php echo $data['penulis']; ?></div>
                     <div class="publisher"><span>Penerbit:</span> <?php echo $data['penerbit']; ?></div>
-                    <div class="year"><span>Terbit:</span> <?php echo $data['tahunterbit']; ?></div>
-                </div>
-                <div class="description"><span>Detail:</span>
-                    <button class="desc_title">Klik</button>
-                    <div class="modal-overlay" id="modalOverlay_<?php echo $data['id_buku']; ?>">
-                        <div class="modal">
-                            <span class="close-modal" data-modal-id="modalOverlay_<?php echo $data['id_buku']; ?>">&times;</span>
-                            <div class="modal-content">
-                                <h2>Detail:</h2>
-                                <p class="desc_detail"><span>Judul:</span> <?php echo $data['judul']; ?></p>
-                                <p class="desc_detail"><span>Penulis:</span> <?php echo $data['penulis']; ?></p>
-                                <p class="desc_detail"><span>Penjelasan Singkat:</span></p>
-                                <p class="desc_detail"><?php echo $data['keterangan']; ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="stock">Stok: 
-                    <?php if ($data['stok'] > 0) {
-                        echo "<span>Tersedia</span>";
-                    } else {
-                        echo "<span class='kosong'>Kosong</span>";
-                    }
-                    ?>
+                    <div class="year"><span>Terbit:</span> <?php echo $data['tahun_terbit']; ?></div>
                 </div>
             </div>
-            <input type="submit" value="Pinjam" name="submit" class="<?php if ($data['stok'] < 1) {echo "clean-btn btn-disabled"; } else {echo "btn"; } ?>" onclick="return confirmSubmit();">
+            <input type="submit" value="Pinjam" name="submit" class="btn" onclick="return confirmSubmit();">
         </form>
         <?php
                 }
