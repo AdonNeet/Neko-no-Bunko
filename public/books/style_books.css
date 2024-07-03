@@ -49,12 +49,33 @@ section{
    padding:3rem 2rem;
 }
 
+.btn,
+.option-btn,
+.delete-btn,
+.white-btn,
+.clean-btn{
+   display: inline-block;
+   /* margin-top: 1rem; */
+   padding:1rem 3rem;
+   cursor: pointer;
+   color:var(--white);
+   font-size: 1.8rem;
+   border-radius: .5rem;
+   text-transform: capitalize;
+}
+
+.btn:hover,
+.option-btn:hover,
+.delete-btn:hover{
+   background-color: var(--black);
+}
+
 /* BOOKS - START */
 .books .box-container {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 30rem);
+    grid-template-columns: repeat(auto-fit, 45vh);
     align-items: safe;
     gap: 1.5rem;
     justify-content: center;
@@ -76,7 +97,7 @@ section{
 }
 
 .books .box-container .box .image {
-    height: 45rem;
+    height: 30rem;
     width: 100%;
     object-fit: cover;
     border-radius: .5rem;
@@ -91,7 +112,7 @@ section{
 
 .books .box-container .box .name {
    padding: 1rem 0;
-   font-size: 2.5rem;
+   font-size: 1.5rem;
    font-weight: bold;
    color: var(--black);
    margin: 0 2rem;
@@ -117,13 +138,13 @@ section{
 .books .box-container .box .info .publisher,
 .books .box-container .box .info .year,
 .books .box-container .box .stock {
-    font-size: 1.6rem;
+    font-size: 1rem;
     color: var(--black);
     margin-bottom: .5rem;
 }
 
 .books .box-container .box .description {
-    font-size: 1.6rem;
+    font-size: 1rem;
     color: var(--black);
     margin-bottom: 1.5rem;
 }

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../config/database.php';
 // session_start();
 
 // include 'koneksi.php';
@@ -50,8 +51,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="images/books.png">
+    <link rel="stylesheet" href="style_books.css">
+    <link rel="icon" type="image/png, image/jpg, image/jpeg" href="/../resource/img/">
 
 </head>
 <body>
@@ -69,23 +70,23 @@
     <div class="box-container">
 
         <?php  
-        $select_books = mysqli_query($conn, "SELECT * FROM buku ORDER BY buku.tahunterbit DESC") or die('query failed');
+        $select_books = mysqli_query($conn, "SELECT * FROM buku ORDER BY buku.tahun_terbit DESC") or die('query failed');
         if(mysqli_num_rows($select_books) > 0){
                 while($data = mysqli_fetch_assoc($select_books)){
         ?>
 
         <form action="books.php" method="post" class="box">
-            <img class="image" src="uploaded_img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)">
+            <img class="image" src="/../resource/img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)">
             <div class="name"><?php echo $data['judul']; ?></div>
             <input type="hidden" name="id_buku" value="<?php echo $data['id_buku']; ?>">
             <div class="details">
                 <div class="info">
                     <div class="author"><span>Penulis:</span> <?php echo $data['penulis']; ?></div>
                     <div class="publisher"><span>Penerbit:</span> <?php echo $data['penerbit']; ?></div>
-                    <div class="year"><span>Terbit:</span> <?php echo $data['tahunterbit']; ?></div>
+                    <div class="year"><span>Terbit:</span> <?php echo $data['tahun_terbit']; ?></div>
                 </div>
                 <div class="stock">Stok: 
-                    <?php if ($data['stok'] > 0) {
+                    <?php if ($data['jumlah_halaman'] > 0) {
                         echo "<span>Tersedia</span>";
                     } else {
                         echo "<span class='kosong'>Kosong</span>";
@@ -93,7 +94,7 @@
                     ?>
                 </div>
             </div>
-            <input type="submit" value="Pinjam" name="submit" class="<?php if ($data['stok'] < 1) {echo "clean-btn btn-disabled"; } else {echo "btn"; } ?>" onclick="return confirmSubmit();">
+            <input type="submit" value="Pinjam" name="submit" class="btn" onclick="return confirmSubmit();">
         </form>
         <?php
         }

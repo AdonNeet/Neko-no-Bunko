@@ -28,7 +28,7 @@ if (isset($_POST['add_book'])) {
     $keterangan = mysqli_real_escape_string($conn, $_POST['sinopsis']);
     $foto = $_FILES['foto']['name'];
     $foto_tmp_name = $_FILES['foto']['tmp_name'];
-    $foto_folder = 'uploaded_img/' . $foto;
+    $foto_folder = __DIR__ . __DIR__ . '/../resource/img/' . $foto;
     
     $add_book_query = mysqli_query($conn, "INSERT INTO `buku`(id_buku, judul, foto, penulis, penerbit, tahun_terbit, id_kategori, jumlah_halaman, sinopsis) VALUES('$id_buku','$judul', '$foto', '$penulis', '$penerbit', '$tahunterbit', '$kategori','$stok', '$keterangan')") or die('Query failed');
     
@@ -44,7 +44,7 @@ if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
     $delete_image_query = mysqli_query($conn, "SELECT foto FROM `buku` WHERE id_buku = '$delete_id'") or die('Query failed');
     $fetch_delete_image = mysqli_fetch_assoc($delete_image_query);
-    unlink('uploaded_img/' . $fetch_delete_image['foto']);
+    unlink(__DIR__ . '/../resource/img/' . $fetch_delete_image['foto']);
     mysqli_query($conn, "DELETE FROM `buku` WHERE id_buku = '$delete_id'") or die('Query failed');
     header('location:admin_buku.php');
 }
@@ -60,12 +60,12 @@ if (isset($_POST['update_book'])) {
     $update_keterangan = mysqli_real_escape_string($conn, $_POST['update_keterangan']);
     $update_foto = $_FILES['update_image']['name'];
     $update_foto_tmp_name = $_FILES['update_image']['tmp_name'];
-    $update_foto_folder = 'uploaded_img/' . $update_foto;
+    $update_foto_folder = __DIR__ . '/../resource/img/' . $update_foto;
     $update_old_image = $_POST['update_old_image'];
 
     if (!empty($update_foto)) {
         move_uploaded_file($update_foto_tmp_name, $update_foto_folder);
-        unlink('uploaded_img/' . $update_old_image);
+        unlink(__DIR__ . '/../resource/img/' . $update_old_image);
         $update_query = mysqli_query($conn, "UPDATE `buku` SET judul = '$update_judul', penulis = '$update_penulis', penerbit = '$update_penerbit', tahun_terbit = '$update_tahunterbit', id_kategori = '$update_kategori', jumlah_halaman = '$update_stok', sinopsis = '$update_keterangan', foto = '$update_foto' WHERE id_buku = '$update_b_id'") or die('Query failed');
     } else {
         $update_query = mysqli_query($conn, "UPDATE `buku` SET judul = '$update_judul', penulis = '$update_penulis', penerbit = '$update_penerbit', tahun_terbit = '$update_tahunterbit', id_kategori = '$update_kategori', jumlah_halaman = '$update_stok', sinopsis = '$update_keterangan' WHERE id_buku = '$update_b_id'") or die('Query failed');
@@ -95,7 +95,7 @@ if (isset($_POST['update_book'])) {
 
     <!-- Custom admin CSS file link  -->
     <link rel="stylesheet" href="style_admin.css">
-    <link rel="icon" type="image/png" href="images/books.png">
+    <link rel="icon" type="image/png, image/jpg, image/jpeg" href="/../resource/img/">
 
 </head>
 
@@ -124,7 +124,11 @@ if (isset($_POST['update_book'])) {
         <div class="box">
             <div class="baris1">
                 <div class="left-column">
-                    <img src="uploaded_img/<?php echo $fetch_books['foto']; ?>" alt="">
+                <?php 
+                $imagePath = "/../resource/img/" . $fetch_books['foto']; 
+                echo "<img src='" . $imagePath . "' alt='Gambar Buku'>";
+                ?>
+ 
                 </div>
                 <div class="right-column">
                     <div class="name"><?php echo $fetch_books['judul']; ?></div>
@@ -200,7 +204,7 @@ if (isset($_POST['update_book'])) {
     <form action="admin_buku.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="update_b_id" value="<?php echo $fetch_update['id_buku']; ?>">
         <input type="hidden" name="update_old_image" value="<?php echo $fetch_update['foto']; ?>">
-        <!-- <img src="uploaded_img/<?php echo $fetch_update['foto']; ?>" alt=""> -->
+        <!-- <img src="/../../resource/img/<?php echo $fetch_update['foto']; ?>" alt=""> -->
         <input type="text" name="update_judul" value="<?php echo $fetch_update['judul']; ?>" class="box" required placeholder="Enter book title">
         <input type="text" name="update_penulis" value="<?php echo $fetch_update['penulis']; ?>" class="box" required placeholder="Enter author name">
         <input type="text" name="update_penerbit" value="<?php echo $fetch_update['penerbit']; ?>" class="box" required placeholder="Enter publisher name">

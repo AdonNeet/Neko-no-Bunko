@@ -29,29 +29,26 @@ require_once __DIR__ . '/../../config/database.php';
       <thead>
          <tr>
             <th>ID Pengembalian</th>
+            <th>ID Pinjam</th>
             <th>Nama Buku</th>
             <th>Nama User</th>
             <th>Tanggal Pengembalian</th>
-            <th>Denda</th>
-            <th class="end">Actions</th>
+            <th class="end">Denda</th>
          </tr>
       </thead>
       <tbody>
          
          <?php
-            $select_pengembalian = mysqli_query($conn, "SELECT pengembalian.id_kembali, buku.judul, user.nama, pengembalian.tanggal_pengembalian, pengembalian.denda FROM `pengembalian` JOIN `buku` ON pengembalian.id_buku = buku.id_buku JOIN `user` ON pengembalian.id_user = user.id_user") or die('Query failed');
+            $select_pengembalian = mysqli_query($conn, "SELECT pengembalian.id_pengembalian, pengembalian.id_pinjam, buku.judul, user.nama, pengembalian.tanggal_pengembalian, pengembalian.denda FROM `pengembalian` JOIN peminjaman ON pengembalian.id_pinjam = peminjaman.id_pinjam JOIN user ON peminjaman.id_user = user.id_user JOIN buku ON peminjaman.id_buku = buku.id_buku;") or die('Query failed');
             while($row = mysqli_fetch_assoc($select_pengembalian)){
          ?>
          <tr>
             <td class="kanan"><?php echo $row['id_pengembalian']; ?></td>
+            <td class="kanan"><?php echo $row['id_pinjam']; ?></td>
             <td><?php echo $row['judul']; ?></td>
             <td><?php echo $row['nama']; ?></td>
             <td class="mid"><?php echo $row['tanggal_pengembalian']; ?></td>
             <td class="kanan">Rp <?php echo $row['denda']; ?>,00</td>
-            <td class="end">
-               <a href="admin_pengembalian.php?update=<?php echo $row['id_pengembalian']; ?>" class="action-btn option-btn">Update</a>
-               <a href="admin_pengembalian.php?delete=<?php echo $row['id_pengembalian']; ?>" onclick="return confirm('Delete this entry?');" class="action-btn delete-btn">Delete</a>
-            </td>
          </tr>
          <?php
             }
@@ -60,20 +57,6 @@ require_once __DIR__ . '/../../config/database.php';
       </tbody>
    </table>
    </div>
-
-   <?php if (isset($pengembalian_data)) { ?>
-      <form action="admin_pengembalian.php" method="post" class="update-form" id="update-pengembalian">
-         <h3>Update:</h3>
-         <input type="hidden" name="id_pengembalian" value="<?php echo $pengembalian_data['id_pengembalian']; ?>">
-         <p> ID Buku: <input type="text" name="id_buku" value="<?php echo $pengembalian_data['id_buku']; ?>" readonly> </p>
-         <p> ID User: <input type="text" name="id_user" value="<?php echo $pengembalian_data['id_user']; ?>" readonly> </p>
-         <p> Tanggal Pengembalian: <input type="date" name="tanggal_pengembalian" value="<?php echo $pengembalian_data['tanggal_pengembalian']; ?>" readonly> </p>
-         <p> Denda: <input type="number" name="denda" value="<?php echo $pengembalian_data['denda']; ?>" readonly> </p>
-         <a name="update_pengembalian" class="option-btn btn-disabled">Update</a>
-         <a id="close-update" class="delete-btn" onclick="window.location.href='admin_pengembalian.php';">Cancel</a>
-         <script>window.location.href='#update-pengembalian';</script>
-      </form>
-   <?php } ?>
 
 </section>
 
