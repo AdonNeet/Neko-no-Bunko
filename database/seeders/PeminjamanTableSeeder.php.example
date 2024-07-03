@@ -1,0 +1,33 @@
+<?php
+
+require_once __DIR__ . '/../../config/database.php';
+
+class PeminjamanTableSeeder
+{
+    public function run()
+    {
+        $conn = require __DIR__ . '/../../config/database.php';
+
+        $peminjaman = [
+            ['id_user' => 'USR001', 'id_buku' => 'BK001', 'tanggal_pinjam' => '2024-04-20 00:00:00', 'tanggal_kembali' => '2024-05-20 00:00:00'],
+            // tambahkan data lainnya
+        ];
+
+        foreach ($peminjaman as $pinjamData) {
+            $sql = "INSERT INTO peminjaman (id_user, id_buku, tanggal_pinjam, tanggal_kembali) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('ssss', $pinjamData['id_user'], $pinjamData['id_buku'], $pinjamData['tanggal_pinjam'], $pinjamData['tanggal_kembali']);
+
+            if ($stmt->execute()) {
+                echo "Seeded peminjaman: ID {$pinjamData['id_pinjam']}\n";
+            } else {
+                echo "Error seeding peminjaman: ID {$pinjamData['id_pinjam']}. Error: " . $stmt->error . "\n";
+            }
+        }
+
+        $stmt->close();
+        mysqli_close($conn);
+    }
+}
+
+?>

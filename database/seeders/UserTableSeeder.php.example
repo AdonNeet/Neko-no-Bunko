@@ -1,0 +1,35 @@
+<?php
+
+require_once __DIR__ . '/../factories/UserFactory.php';
+require_once __DIR__ . '/../../config/database.php';
+
+class UserTableSeeder
+{
+    public function run()
+    {
+        $conn = require __DIR__ . '/../../config/database.php';
+
+        $users = [
+            ['id_user' => 'USR001', 'id_akun' => 'AK001', 'nama' => 'Budi Santoso', 'alamat' => 'Jl. Merdeka No.1, Jakarta', 'no_telepon' => '081234567890'],
+            // tambahkan data lainnya
+        ];
+
+        foreach ($users as $userData) {
+            $user = UserFactory::create($userData);
+
+            $stmt = $conn->prepare('INSERT INTO user (id_user, id_akun, nama, alamat, no_telepon) VALUES (?, ?, ?, ?, ?)');
+            $stmt->bind_param('sssss', $user['id_user'], $user['id_akun'], $user['nama'], $user['alamat'], $user['no_telepon']);
+
+            if ($stmt->execute()) {
+                echo "Seeded user: {$user['nama']}\n";
+            } else {
+                echo "Error seeding user: {$user['nama']}. Error: " . $stmt->error . "\n";
+            }
+        }
+
+        $stmt->close();
+        mysqli_close($conn);
+    }
+}
+
+?>

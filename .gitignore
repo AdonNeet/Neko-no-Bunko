@@ -2,6 +2,7 @@
 /.env
 /vendor
 /storage
+*TableSeeder.php
 
 # Idea
 note.*

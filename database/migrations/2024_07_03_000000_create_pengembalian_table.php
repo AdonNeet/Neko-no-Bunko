@@ -6,7 +6,7 @@ $conn = require __DIR__ . '/../../config/database.php';
 
 $sql = "
 CREATE TABLE IF NOT EXISTS pengembalian (
-    `id_pengembalian` int(10) UNSIGNED NOT NULL,
+    `id_pengembalian` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_pinjam` int(10) UNSIGNED NOT NULL,
     `tanggal_pengembalian` datetime DEFAULT NULL,
     `denda` int(11) DEFAULT NULL,

@@ -1,0 +1,49 @@
+<?php
+
+require_once __DIR__ . '/../config/database.php';
+
+class BukuTableSeeder
+{
+    public function run()
+    {
+        $conn = require __DIR__ . '/../config/database.php';
+
+        $bukuData = [
+            ['id_buku' => 'BK001', 'id_kategori' => 'KAT001', 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'penerbit' => 'Bentang Pustaka', 'tahun_terbit' => '2005', 'jumlah_halaman' => 529, 'foto' => NULL, 'sinopsis' => 'Novel tentang persahabatan dan perjuangan anak-anak di Belitung.', 'ebook' => NULL],
+            ['id_buku' => 'BK002', 'id_kategori' => 'KAT002', 'judul' => 'The Art of War', 'penulis' => 'Sun Tzu', 'penerbit' => 'Gramedia', 'tahun_terbit' => '2010', 'jumlah_halaman' => 273, 'foto' => NULL, 'sinopsis' => 'Buku strategi perang yang klasik.', 'ebook' => NULL],
+            ['id_buku' => 'BK003', 'id_kategori' => 'KAT003', 'judul' => 'Sejarah Indonesia Modern', 'penulis' => 'M.C. Ricklefs', 'penerbit' => 'Serambi', 'tahun_terbit' => '2008', 'jumlah_halaman' => 568, 'foto' => NULL, 'sinopsis' => 'Sejarah Indonesia dari masa kolonial hingga modern.', 'ebook' => NULL],
+            ['id_buku' => 'BK004', 'id_kategori' => 'KAT001', 'judul' => 'Ayat-Ayat Cinta', 'penulis' => 'Habiburrahman El Shirazy', 'penerbit' => 'Republika', 'tahun_terbit' => '2004', 'jumlah_halaman' => 311, 'foto' => NULL, 'sinopsis' => 'Novel tentang cinta dan agama.', 'ebook' => NULL],
+            ['id_buku' => 'BK005', 'id_kategori' => 'KAT006', 'judul' => 'Menggagas Kesehatan', 'penulis' => 'Dr. Sudarmo', 'penerbit' => 'Erlangga', 'tahun_terbit' => '2015', 'jumlah_halaman' => 180, 'foto' => NULL, 'sinopsis' => 'Buku tentang upaya kesehatan masyarakat.', 'ebook' => NULL],
+            ['id_buku' => 'BK006', 'id_kategori' => 'KAT007', 'judul' => 'Pola Hidup Sehat', 'penulis' => 'Dra. Hj. Siti Suryati', 'penerbit' => 'Gramedia Pustaka Utama', 'tahun_terbit' => '2012', 'jumlah_halaman' => 220, 'foto' => NULL, 'sinopsis' => 'Panduan praktis untuk hidup sehat.', 'ebook' => NULL],
+            ['id_buku' => 'BK007', 'id_kategori' => 'KAT008', 'judul' => 'Pendidikan Pada Abad 21', 'penulis' => 'Prof. Dr. H. Anies Baswedan', 'penerbit' => 'Erlangga', 'tahun_terbit' => '2019', 'jumlah_halaman' => 250, 'foto' => NULL, 'sinopsis' => 'Konsep dan tantangan pendidikan di era global.', 'ebook' => NULL],
+            ['id_buku' => 'BK008', 'id_kategori' => 'KAT004', 'judul' => 'Python Programming', 'penulis' => 'Guido van Rossum', 'penerbit' => 'O\'Reilly Media', 'tahun_terbit' => '2019', 'jumlah_halaman' => 400, 'foto' => NULL, 'sinopsis' => 'Buku panduan lengkap untuk belajar pemrograman Python.', 'ebook' => NULL],
+            ['id_buku' => 'BK009', 'id_kategori' => 'KAT001', 'judul' => 'Ayat-Ayat Cinta 2', 'penulis' => 'Habiburrahman El Shirazy', 'penerbit' => 'Republika', 'tahun_terbit' => '2007', 'jumlah_halaman' => 288, 'foto' => NULL, 'sinopsis' => 'Kelanjutan kisah cinta dalam perspektif agama.', 'ebook' => NULL],
+            ['id_buku' => 'BK010', 'id_kategori' => 'KAT002', 'judul' => 'Homo Deus', 'penulis' => 'Yuval Noah Harari', 'penerbit' => 'Penguin Random House', 'tahun_terbit' => '2016', 'jumlah_halaman' => 450, 'foto' => NULL, 'sinopsis' => 'Exploration of the future of humanity in a data-driven world.', 'ebook' => NULL],
+            ['id_buku' => 'BK011', 'id_kategori' => 'KAT003', 'judul' => 'Sejarah Kebudayaan Indonesia', 'penulis' => 'J.J. Rizal', 'penerbit' => 'Kompas', 'tahun_terbit' => '2010', 'jumlah_halaman' => 320, 'foto' => NULL, 'sinopsis' => 'Pembahasan tentang perkembangan kebudayaan di Indonesia.', 'ebook' => NULL],
+            ['id_buku' => 'BK012', 'id_kategori' => 'KAT005', 'judul' => 'Tasawuf Modern', 'penulis' => 'Buya Hamka', 'penerbit' => 'Gema Insani', 'tahun_terbit' => '1983', 'jumlah_halaman' => 250, 'foto' => NULL, 'sinopsis' => 'Buku tentang ajaran tasawuf yang disesuaikan dengan kehidupan modern.', 'ebook' => NULL],
+            ['id_buku' => 'BK013', 'id_kategori' => 'KAT007', 'judul' => 'Mengatasi Stres', 'penulis' => 'Dr. Ahmad Syukri', 'penerbit' => 'Gramedia Pustaka Utama', 'tahun_terbit' => '2018', 'jumlah_halaman' => 200, 'foto' => NULL, 'sinopsis' => 'Panduan praktis untuk mengatasi stres dalam kehidupan sehari-hari.', 'ebook' => NULL],
+            ['id_buku' => 'BK014', 'id_kategori' => 'KAT008', 'judul' => 'Pendidikan Anak', 'penulis' => 'Prof. Dr. Ani Sunaryati', 'penerbit' => 'Erlangga', 'tahun_terbit' => '2021', 'jumlah_halaman' => 180, 'foto' => NULL, 'sinopsis' => 'Panduan bagi orang tua dalam mendidik anak.', 'ebook' => NULL],
+            ['id_buku' => 'BK015', 'id_kategori' => 'KAT004', 'judul' => 'Blockchain Technology', 'penulis' => 'Satoshi Nakamoto', 'penerbit' => 'Springer', 'tahun_terbit' => '2022', 'jumlah_halaman' => 350, 'foto' => NULL, 'sinopsis' => 'Introduction to blockchain technology and its applications.', 'ebook' => NULL],
+        ];
+
+        foreach ($bukuData as $buku) {
+            $stmt = $conn->prepare('INSERT INTO buku (id_buku, id_kategori, judul, penulis, penerbit, tahun_terbit, jumlah_halaman, foto, sinopsis, ebook) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+            $stmt->bind_param('ssssssisss', $buku['id_buku'], $buku['id_kategori'], $buku['judul'], $buku['penulis'], $buku['penerbit'], $buku['tahun_terbit'], $buku['jumlah_halaman'], $buku['foto'], $buku['sinopsis'], $buku['ebook']);
+
+            if ($stmt->execute()) {
+                echo "Buku record created successfully.\n";
+            } else {
+                echo "Error creating buku record: " . $stmt->error . "\n";
+            }
+        }
+
+        $stmt->close();
+        mysqli_close($conn);
+    }
+}
+
+// Jalankan Seeder
+$seeder = new BukuTableSeeder();
+$seeder->run();
+
+?>

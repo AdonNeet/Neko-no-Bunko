@@ -1,0 +1,36 @@
+// database/seeders/AdminSeeder.php
+<?php
+
+require_once __DIR__ . '/../factories/AdminFactory.php';
+require_once __DIR__ . '/../../config/database.php';
+
+class AdminTableSeeder
+{
+    public function run()
+    {
+        $conn = require __DIR__ . '/../../config/database.php';
+
+        $admins = [
+            ['id_admin' => 'ADM001', 'id_akun' => 'AK001', 'name' => 'Admin Utama'],
+            // tambahkan data lainnya
+        ];
+
+        foreach ($admins as $adminData) {
+            $admin = AdminFactory::create($adminData);
+
+            $stmt = $conn->prepare('INSERT INTO admin (id_admin, id_akun, name) VALUES (?, ?, ?)');
+            $stmt->bind_param('sss', $admin['id_admin'], $admin['id_akun'], $admin['name']);
+
+            if ($stmt->execute()) {
+                echo "Seeded admin: {$admin['name']}\n";
+            } else {
+                echo "Error seeding admin: {$admin['name']}. Error: " . $stmt->error . "\n";
+            }
+        }
+
+        $stmt->close();
+        mysqli_close($conn);
+    }
+}
+
+?>

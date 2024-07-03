@@ -1,0 +1,32 @@
+<?php
+
+require_once __DIR__ . '/../../config/database.php';
+
+class PengembalianTableSeeder
+{
+    public function run()
+    {
+        $conn = require __DIR__ . '/../../config/database.php';
+
+        $pengembalianData = [
+            ['id_pinjam' => 1, 'tanggal_pengembalian' => '2024-05-19 00:00:00', 'denda' => 0],
+            // tambahkan data lainnya
+        ];
+
+        foreach ($pengembalianData as $data) {
+            $stmt = $conn->prepare('INSERT INTO pengembalian (id_pengembalian, id_pinjam, tanggal_pengembalian, denda) VALUES (?, ?, ?, ?)');
+            $stmt->bind_param('iiss', $data['id_pinjam'], $data['tanggal_pengembalian'], $data['denda']);
+
+            if ($stmt->execute()) {
+                echo "Seeded pengembalian ID: {$data['id_pengembalian']}\n";
+            } else {
+                echo "Error seeding pengembalian ID: {$data['id_pengembalian']}. Error: " . $stmt->error . "\n";
+            }
+        }
+
+        $stmt->close();
+        mysqli_close($conn);
+    }
+}
+
+?>

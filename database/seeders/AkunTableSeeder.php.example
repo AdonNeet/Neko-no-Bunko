@@ -1,0 +1,39 @@
+// database/seeders/AkunSeeder.php
+<?php
+
+require_once __DIR__ . '/../factories/AkunFactory.php';
+require_once __DIR__ . '/../../config/database.php';
+
+class AkunTableSeeder
+{
+    public function run()
+    {
+        $conn = require __DIR__ . '/../../config/database.php';
+
+        $akuns = [
+            ['id_akun' => 'AK001', 'username' => 'user', 'email' => 'user@example.com', 'password' => 'qwertyui', 'role' => 'admin'],
+            // tambahkan template akun lainnya
+        ];
+
+        foreach ($akuns as $akunData) {
+            $akun = AkunFactory::create($akunData);
+
+            $stmt = $conn->prepare('INSERT INTO akun (id_akun, username, email, password, role) VALUES (?, ?, ?, ?, ?)');
+            $stmt->bind_param('sssss', $akun['id_akun'], $akun['username'], $akun['email'], $akun['password'], $akun['role']);
+
+            if ($stmt->execute()) {
+                echo "Seeded akun: {$akun['username']}\n";
+            } else {
+                echo "Error seeding akun: {$akun['username']}. Error: " . $stmt->error . "\n";
+            }
+        }
+
+        $stmt->close();
+        mysqli_close($conn);
+    }
+}
+
+// Jalankan seeder
+$seeder = new AkunTableSeeder();
+$seeder->run();
+?>

@@ -1,0 +1,41 @@
+<?php
+
+require_once __DIR__ . '/../factories/KategoriFactory.php';
+require_once __DIR__ . '/../../config/database.php';
+
+class KategoriTableSeeder
+{
+    public function run()
+    {
+        $conn = require __DIR__ . '/../../config/database.php';
+
+        $kategori = [
+            ['id_kategori' => 'KAT001', 'nama_kategori' => 'Fiksi'],
+            ['id_kategori' => 'KAT002', 'nama_kategori' => 'Non-Fiksi'],
+            ['id_kategori' => 'KAT003', 'nama_kategori' => 'Sejarah'],
+            ['id_kategori' => 'KAT004', 'nama_kategori' => 'Komputer'],
+            ['id_kategori' => 'KAT005', 'nama_kategori' => 'Agama'],
+            ['id_kategori' => 'KAT006', 'nama_kategori' => 'Kesehatan'],
+            ['id_kategori' => 'KAT007', 'nama_kategori' => 'Psikologi'],
+            ['id_kategori' => 'KAT008', 'nama_kategori' => 'Pendidikan'],
+        ];
+
+        foreach ($kategori as $kategoriData) {
+            $kategori = KategoriFactory::create($kategoriData);
+
+            $stmt = $conn->prepare('INSERT INTO kategori (id_kategori, nama_kategori) VALUES (?, ?)');
+            $stmt->bind_param('ss', $kategori['id_kategori'], $kategori['nama_kategori']);
+
+            if ($stmt->execute()) {
+                echo "Seeded kategori: {$kategori['nama_kategori']}\n";
+            } else {
+                echo "Error seeding kategori: {$kategori['nama_kategori']}. Error: " . $stmt->error . "\n";
+            }
+        }
+
+        $stmt->close();
+        mysqli_close($conn);
+    }
+}
+
+?>
