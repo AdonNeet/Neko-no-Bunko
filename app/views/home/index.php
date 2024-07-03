@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card">
-                <img src="dumy.jpg" class="card-img-top" alt="Foto">
+                <img src="dumy" class="card-img-top" alt="Foto">
                 <div class="card-body">
                     <p class="card-text">Nama: As'ad Nirot Ahmadi</p>
                     <p class="card-text">NIM: L200220155</p>
@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="dumy.jpg" class="card-img-top" alt="Foto">
+                <img src="dumy" class="card-img-top" alt="Foto">
                 <div class="card-body">
                     <p class="card-text">Nama: Iqbal Firmansyah</p>
                     <p class="card-text">NIM: L200220180</p>
@@ -35,7 +35,7 @@
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="dumy.jpg" class="card-img-top" alt="Foto">
+                <img src="dumy" class="card-img-top" alt="Foto">
                 <div class="card-body">
                     <p class="card-text">Nama: Bara Donta Perdana</p>
                     <p class="card-text">NIM: L200220194</p>

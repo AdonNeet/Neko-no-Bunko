@@ -76,7 +76,7 @@
         </ul>
     </div>
     <div class="icons" style="">
-         <a href="search.php" class="fas fa-search"></a>
+         <a href="search" class="fas fa-search"></a>
          <a href="profile.php" id="user-btn" class="fas fa-user"></a>
       </div>
     

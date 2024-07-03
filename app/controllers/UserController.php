@@ -14,5 +14,10 @@ class UserController
 
         require_once __DIR__ . '/../views/user/profile.php';
     }
+
+    public function index()
+    {
+        require_once __DIR__ . '/../views/user/pinjam.php';
+    }
 }
 ?>
