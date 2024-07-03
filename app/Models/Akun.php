@@ -9,7 +9,7 @@ class Akun
 
     public function __construct()
     {
-        $this->conn = require __DIR__ . '/../config/database.php';
+        $this->conn = require __DIR__ . '/../../config/database.php';
     }
 
     public function create($attributes = [])
@@ -69,6 +69,31 @@ class Akun
             return false;
         }
     }
+
+    public function findByUsernameOrEmail($username_or_email)
+    {
+        $sql = "SELECT * FROM akun WHERE username = ? OR email = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('ss', $username_or_email, $username_or_email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    public function getLastInsertedId()
+    {
+        $sql = "SELECT id_akun FROM akun ORDER BY updated_at DESC LIMIT 1";
+        $result = $this->conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['id_akun'];
+        } else {
+            return null; // Return null or handle error as per your application's logic
+        }
+    }
+
+
 }
 
 ?>

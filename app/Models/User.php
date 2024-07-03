@@ -80,6 +80,17 @@ class User
             return false;
         }
     }
+
+    public function findByAkunId($id_akun)
+    {
+        $sql = "SELECT * FROM user WHERE id_akun = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('s', $id_akun);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
 }
 
 ?>

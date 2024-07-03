@@ -1,3 +1,18 @@
+<?php
+require_once __DIR__ . '/../../app/controllers/AuthController.php';
+
+$auth = new AuthController();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['register_submit'])) {
+        $auth->register($_POST);
+    } elseif (isset($_POST['login_submit'])) {
+        $auth->login($_POST);
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +26,7 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form action="#" class="sign-in-form" method="POST">
+                <form action="auth/index.php" class="sign-in-form" method="POST">
                     <h2 class="title">Sign in</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
@@ -25,7 +40,7 @@
                     <div class="social-media">
                     </div>
                 </form>
-                <form action="#" class="sign-up-form" method="POST">
+                <form action="auth/index.php" class="sign-up-form" method="POST">
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>

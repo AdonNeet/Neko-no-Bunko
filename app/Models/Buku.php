@@ -9,7 +9,7 @@ class Buku
 
     public function __construct()
     {
-        $this->conn = require __DIR__ . '/../config/database.php';
+        $this->conn = require __DIR__ . '/../../config/database.php';
     }
 
     public function create($attributes = [])
