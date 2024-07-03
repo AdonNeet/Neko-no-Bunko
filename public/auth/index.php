@@ -19,14 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/64d58efce2.js"></script>
-    <link rel="stylesheet" href="auth/style_auth.css" />
+    <link rel="stylesheet" href="style_auth.css" />
     <title>BuBar Auth</title>
 </head>
 <body>
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form action="auth/index.php" class="sign-in-form" method="POST">
+                <form action="index.php" class="sign-in-form" method="POST">
                     <h2 class="title">Sign in</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
@@ -97,6 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
-    <script src="auth/app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

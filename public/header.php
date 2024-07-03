@@ -71,13 +71,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="#main">Beranda</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Books</a></li>
+            <li class="nav-item"><a class="nav-link" href="/books/books.php">Books</a></li>
             <li class="nav-item"><a class="nav-link" href="#about-us">About Us</a></li>
         </ul>
     </div>
     <div class="icons" style="">
          <a href="search.php" class="fas fa-search"></a>
-         <a href="user/profile.php" id="user-btn" class="fas fa-user"></a>
+         <a href="/user/profile.php" id="user-btn" class="fas fa-user"></a>
       </div>
     
 </nav>
