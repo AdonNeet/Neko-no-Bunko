@@ -9,7 +9,7 @@ class PengembalianTableSeeder
         $conn = require __DIR__ . '/../../config/database.php';
 
         $pengembalianData = [
-            ['id_pinjam' => 1, 'tanggal_pengembalian' => '2024-05-19 00:00:00', 'denda' => 0],
+            ['id_pengembalian' => 1, 'id_pinjam' => 1, 'tanggal_pengembalian' => '2024-05-19 00:00:00', 'denda' => 0],
             // tambahkan data lainnya
         ];
 

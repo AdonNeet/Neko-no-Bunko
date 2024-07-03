@@ -9,7 +9,7 @@ class PeminjamanTableSeeder
         $conn = require __DIR__ . '/../../config/database.php';
 
         $peminjaman = [
-            ['id_user' => 'USR001', 'id_buku' => 'BK001', 'tanggal_pinjam' => '2024-04-20 00:00:00', 'tanggal_kembali' => '2024-05-20 00:00:00'],
+            ['id_pinjam' => 1, 'id_user' => 'USR001', 'id_buku' => 'BK001', 'tanggal_pinjam' => '2024-04-20 00:00:00', 'tanggal_kembali' => '2024-05-20 00:00:00'],
             // tambahkan data lainnya
         ];
 
