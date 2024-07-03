@@ -1,20 +1,27 @@
 <?php
 
-// include 'koneksi.php';
-// session_start();
+include 'koneksi.php';
+session_start();
 
-// // jika bukan admin diarahkan ke halaman user
-// if( isset($_SESSION["login"]) ) {
-//     if ($_SESSION['id_user'] !== 1) {
-//         header("Location: index.php");
-//     }
+// jika bukan admin diarahkan ke halaman user
+if( isset($_SESSION["login"]) ) {
+    if ($_SESSION['id_user'] !== 1) {
+        header("Location: index.php");
+    }
+}
+
+// Jika tombol tambah di tekan, tampilkan form tambah buku
+// if (isset($_POST['tambah'])) {
+//     echo '<script>document.querySelector(".add-products").style.display = "block";</script>';
+// } else {
+//     echo '<script>document.querySelector(".add-products").style.display = "none";</script>';
 // }
 
-// // jika belum login maka diarahkan ke halaman login
-// if( !isset($_SESSION["login"]) ) {
-//     header("Location: login.php");
-//     exit;
-// }
+// jika belum login maka diarahkan ke halaman login
+if( !isset($_SESSION["login"]) ) {
+    header("Location: login.php");
+    exit;
+}
 
 if (isset($_POST['add_book'])) {
     $judul = mysqli_real_escape_string($conn, $_POST['judul']);
@@ -105,7 +112,11 @@ if (isset($_POST['update_book'])) {
     <div class="side-btn">
         <div class="kiri"></div>
         <h1 class="title">Library Books</h1>
-        <div class="kanan"><a href="#new"><button name="tambah"class="btn">Tambah</button></a></div>
+        <div class="kanan">
+            <div class="actions">
+                    <a href="admin_buku.php?update=1" class="option-btn">Tambah</a>
+                </div>    
+        </a></div>
     </div>
     <div class="box-container">
     <?php
@@ -131,7 +142,6 @@ if (isset($_POST['update_book'])) {
                     <div class="author"><span>Penulis:</span> <?php echo $fetch_books['penulis']; ?></div>
                     <div class="publisher"><span>Penerbit:</span> <?php echo $fetch_books['penerbit']; ?></div>
                     <div class="year"><span>Terbit:</span> <?php echo $fetch_books['tahunterbit']; ?></div>
-                    <div class="stock"><span>Stok:</span> <?php echo $fetch_books['stok']; ?></div>
                 </div>
                 <div class="actions">
                     <a href="admin_buku.php?update=<?php echo $fetch_books['id_buku']; ?>" class="option-btn">Update</a>
@@ -148,29 +158,46 @@ if (isset($_POST['update_book'])) {
     </div>
 </section>
 
-
-<!-- Book CRUD section starts  -->
-<section id="new" class="add-products">
-    <form action="" method="post" enctype="multipart/form-data">
-        <h3>Add Book</h3>
-        <input type="text" name="judul" class="box" placeholder="Enter book title" required>
-        <input type="text" name="penulis" class="box" placeholder="Enter author name" required>
-        <input type="text" name="penerbit" class="box" placeholder="Enter publisher name" required>
-        <input type="date" name="tahunterbit" class="box" placeholder="Enter year of publication" required>
-        <input type="number" min="0" name="stok" class="box" placeholder="Enter stock quantity" required>
-        <textarea rows="3" name="keterangan" class="box" placeholder="Enter description" style="resize: none;"></textarea>
-        <input type="file" name="foto" accept="image/jpg, image/jpeg, image/png" class="box">
-        <input type="submit" value="Add Book" name="add_book" class="btn">
-    </form>
-</section>
-<!-- Book CRUD section ends -->
-
-
-
 <section class="edit-product-form">
     <?php
     if (isset($_GET['update'])) {
         $update_id = $_GET['update'];
+        if ($update_id == 1) {
+        ?>
+            <form action="admin_buku.php" method="post" enctype="multipart/form-data">
+                <h3>Add Book</h3>
+                <input type="text" name="id_buku" class="box" placeholder="Enter id book title" required>
+                <input type="text" name="judul" class="box" placeholder="Enter book title" required>
+                <input type="text" name="penulis" class="box" placeholder="Enter author name" required>
+                <input type="text" name="penerbit" class="box" placeholder="Enter publisher name" required>
+                <input type="date" name="tahunterbit" class="box" placeholder="Enter year of publication" required>
+                <!-- <label for="category">Pilih Kategori:</label>
+                    <select name="category" id="category">
+                        <?php
+                        //     $sql = "SELECT id_kategori, nama_kategori FROM kategori";
+                        //     $result = $conn->query($sql);
+
+                        // if ($result->num_rows > 0) {
+                        //     // Output data dari setiap baris
+                        //     while($row = $result->fetch_assoc()) {
+                        //         echo '<option value="'.$row["id_kategori"].'">'.$row["nama_kategori"].'</option>';
+                        //     }
+                        // } else {
+                        //     echo '<option value="">Tidak ada kategori tersedia</option>';
+                        // }
+                        ?>
+                </select> -->
+                <input type="number" min="0" name="halaman" class="box" placeholder="Enter pages quantity" required>
+                <textarea rows="3" name="keterangan" class="box" placeholder="Enter description" style="resize: none;"></textarea>
+                <label for="category">upload cover:</label>
+                <input type="file" name="foto" accept="image/jpg, image/jpeg, image/png" class="box">
+                <label for="category">upload file:</label>
+                <input type="file" name="ebook" accept="application/pdf" class="box" placeholder="upload foto">
+                <input type="submit" value="Add Book" name="add_book" class="btn">
+                <input type="button" value="Cancel" id="close-update" class="delete-btn" onclick="window.location.href='admin_buku.php';">
+            </form>
+        <?php
+        } else {
         $update_query = mysqli_query($conn, "SELECT * FROM `buku` WHERE id_buku = '$update_id'") or die('Query failed');
         if (mysqli_num_rows($update_query) > 0) {
             while ($fetch_update = mysqli_fetch_assoc($update_query)) {
@@ -183,20 +210,24 @@ if (isset($_POST['update_book'])) {
         <input type="text" name="update_penulis" value="<?php echo $fetch_update['penulis']; ?>" class="box" required placeholder="Enter author name">
         <input type="text" name="update_penerbit" value="<?php echo $fetch_update['penerbit']; ?>" class="box" required placeholder="Enter publisher name">
         <input type="date" name="update_tahunterbit" value="<?php echo $fetch_update['tahunterbit']; ?>" class="box" required placeholder="Enter year of publication">
-        <input type="number" name="update_stok" value="<?php echo $fetch_update['stok']; ?>" min="0" class="box" required placeholder="Enter stock quantity">
+        <input type="number" name="update_pages" value="<?php echo $fetch_update['jumlah_halaman']; ?>" min="0" class="box" required placeholder="Enter pages quantity">
         <textarea rows="8" name="update_keterangan" class="box" placeholder="Enter description" style="resize: none;"><?php echo $fetch_update['keterangan']; ?></textarea>
         <input type="file" class="box" name="update_image" accept="image/jpg, image/jpeg, image/png">
+        <input type="file" name="ebook" accept="application/pdf" class="box" placeholder="upload foto">
         <input type="submit" value="Update" name="update_book" class="option-btn">
         <input type="button" value="Cancel" id="close-update" class="delete-btn" onclick="window.location.href='admin_buku.php';">
     </form>
     <?php
             }
         }
+        }
     } else {
         echo '<script>document.querySelector(".edit-product-form").style.display = "none";</script>';
     }
     ?>
 </section>
+
+
 
 <?php include 'admin_footer.php'; ?>
 
