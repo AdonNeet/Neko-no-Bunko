@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../config/database.php';
 session_start();
 
 if (!isset($_SESSION["role"])) {
-  header("Location: /../auth");
+  header("Location: /../");
   exit;
 }
 ?>
