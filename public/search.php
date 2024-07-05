@@ -83,9 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="search.php" method="post" class="box" >
             <input type="hidden" name="id_buku" value="<?php echo $data['id_buku']; ?>">
             <input type="hidden" name="pinjamBuku" value="<?php echo true; ?>">
-            <a href="book_detail.php?id_buku=<?php $data['id_buku']; ?>">
-                <img class="image" src="/../resource/img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)" >
-            </a>
+            <img class="image" src="/../resource/img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)" >
             <div class="name"><?php echo $data['judul']; ?></div>
             <div class="details">
                 <div class="info">

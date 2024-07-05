@@ -7,7 +7,7 @@
                     <li><a href="/#main">Home</a></li>
                     <li><a href="#">Books</a></li>
                     <li><a href="/#about-us">About Us</a></li>
-                    <li><a href="/#faq">FAQ</a></li>
+                    <li><a href="/#faq-section">FAQ</a></li>
                 </ul>
             </div>
             <div class="col-md-6">
