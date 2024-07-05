@@ -7,7 +7,7 @@ session_start();
 
 // jika belum login maka diarahkan ke halaman login
 if (!isset($_SESSION["user_id"])) {
-    header("Location: /../auth");
+    header("Location: /../auth/");
     exit;
 }
 
@@ -23,15 +23,17 @@ $akun = $akunModel->find($id_akun);
 $user = $userModel->findByAkunId($id_akun);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id_user = $user['id_user'];
-    $id_buku = $_POST['id_buku'];
-    $current_date = (new DateTime())->format('Y-m-d H:i:s');
-
-    $query = "INSERT INTO peminjaman (id_user, id_buku, tanggal_pinjam) VALUES ('$id_user', '$id_buku', '$current_date')";
-    if (mysqli_query($conn, $query)) {
-        echo "Data berhasil ditambahkan.";
-    } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+    if (isset($_POST['pinjam'])){
+        $id_user = $user['id_user'];
+        $id_buku = $_POST['id_buku'];
+        $current_date = (new DateTime())->format('Y-m-d H:i:s');
+    
+        $query = "INSERT INTO peminjaman (id_user, id_buku, tanggal_pinjam) VALUES ('$id_user', '$id_buku', '$current_date')";
+        if (mysqli_query($conn, $query)) {
+            echo "Data berhasil ditambahkan.";
+        } else {
+            echo "Error: " . $query . "<br>" . mysqli_error($conn);
+        }
     }
 }
 ?>
@@ -74,9 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          
         <form action="books.php" method="post" class="box" >
             <input type="hidden" name="id_buku" value="<?php echo $data['id_buku']; ?>">
-            <a href="book_detail.php?id_buku=<?php $data['id_buku']; ?>">
-                <img class="image" src="/../resource/img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)" >
-            </a>
+            <img class="image" src="/../resource/img/<?php echo $data['foto']; ?>" alt="" onclick="openModal(<?php echo $data['id_buku']; ?>)" >
             <div class="name"><?php echo $data['judul']; ?></div>
             <div class="details">
                 <div class="info">
@@ -85,7 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="year"><span>Terbit:</span> <?php echo $data['tahun_terbit']; ?></div>
                 </div>
             </div>
-            <input type="submit" value="Pinjam" name="submit" class="btn" onclick="return confirmSubmit();">
+            <!-- <input type="submit" value="Lihat Buku" name="detail" class="btn"> -->
+            <a href="book_detail.php?id_buku=<?= $data['id_buku']; ?>" class="btn">Lihat Buku</a>
+            <input type="submit" value="Pinjam" name="pinjam" class="btn" onclick="return confirmSubmit();">
         </form>
         <?php
         }
@@ -111,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php include 'footer.php'; ?>
 
 <!-- custom js file link  -->
-<script src="js/script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>

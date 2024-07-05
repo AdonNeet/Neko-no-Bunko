@@ -239,7 +239,7 @@ if (isset($_POST['update_book'])) {
 <?php include 'admin_footer.php'; ?>
 
 <!-- Custom admin JS file link  -->
-<script src="js/admin_script.js"></script>
+<script src="admin_script.js"></script>
 
 </body>
 

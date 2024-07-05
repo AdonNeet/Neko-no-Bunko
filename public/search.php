@@ -24,7 +24,7 @@ $akun = $akunModel->find($id_akun);
 $user = $userModel->findByAkunId($id_akun);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if($_POST['Pinjam'] == true) {
+    if (isset($_POST['Pinjam'])) {
         $id_user = $user['id_user'];
         $id_buku = $_POST['id_buku'];
         $current_date = (new DateTime())->format('Y-m-d H:i:s');
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="year"><span>Terbit:</span> <?php echo $data['tahun_terbit']; ?></div>
                 </div>
             </div>
-            <input type="submit" value="Pinjam" name="submit" class="btn" onclick="return confirmSubmit();">
+            <input type="submit" value="Pinjam" name="Pinjam" class="btn" onclick="return confirmSubmit();">
         </form>
         <?php
                 }
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php include 'footer.php'; ?>
 
 <!-- custom js file link  -->
-<script src="js/script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
