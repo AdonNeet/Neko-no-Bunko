@@ -4,10 +4,10 @@
             <div class="col-md-6">
                 <h5>Quick Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#main">Home</a></li>
+                    <li><a href="/#main">Home</a></li>
                     <li><a href="#">Books</a></li>
-                    <li><a href="#about-us">About Us</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="/#about-us">About Us</a></li>
+                    <li><a href="/#faq">FAQ</a></li>
                 </ul>
             </div>
             <div class="col-md-6">

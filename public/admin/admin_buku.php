@@ -10,19 +10,37 @@ if (!isset($_SESSION["role"])) {
 }
 
 if (isset($_POST['add_book'])) {
-    $id_buku = mysqli_real_escape_string($conn, $_POST['id_buku']);
+    $query = "SELECT id_buku FROM buku ORDER BY id_buku DESC LIMIT 1";
+    $result = mysqli_query($conn, $query);
+    $lastID = null;
+    if ($result) {
+        $data = mysqli_fetch_assoc($result);
+        if ($data) {
+            $lastID = $data['id_buku'];
+        }
+    }
+    // Buat ID baru dengan format yang diinginkan
+    $format = "BK"; // Format id
+    if ($lastID) {
+        $lastNumber = substr($lastID, 2); // Ambil bagian angka
+        $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT); // Naikkan angka dan tambahkan nol di depan
+    } else {
+        $newNumber = '001'; // Jika belum ada ID, mulai dari 0001
+    }
+    $id_buku =  $format . $newNumber;
+    // $id_buku = mysqli_real_escape_string($conn, $_POST['id_buku']);
     $judul = mysqli_real_escape_string($conn, $_POST['judul']);
     $penulis = mysqli_real_escape_string($conn, $_POST['penulis']);
     $penerbit = mysqli_real_escape_string($conn, $_POST['penerbit']);
-    $tahunterbit = mysqli_real_escape_string($conn, $_POST['tahun_terbit']);
+    $tahun_terbit = mysqli_real_escape_string($conn, $_POST['tahun_terbit']);
     $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
     $stok = mysqli_real_escape_string($conn, $_POST['jumlah_halaman']);
     $keterangan = mysqli_real_escape_string($conn, $_POST['sinopsis']);
     $foto = $_FILES['foto']['name'];
     $foto_tmp_name = $_FILES['foto']['tmp_name'];
-    $foto_folder = __DIR__ . __DIR__ . '/../resource/img/' . $foto;
+    $foto_folder = __DIR__ . '/../resource/img/' . $foto;
     
-    $add_book_query = mysqli_query($conn, "INSERT INTO `buku`(id_buku, judul, foto, penulis, penerbit, tahun_terbit, id_kategori, jumlah_halaman, sinopsis) VALUES('$id_buku','$judul', '$foto', '$penulis', '$penerbit', '$tahunterbit', '$kategori','$stok', '$keterangan')") or die('Query failed');
+    $add_book_query = mysqli_query($conn, "INSERT INTO `buku`(id_buku, judul, foto, penulis, penerbit, tahun_terbit, id_kategori, jumlah_halaman, sinopsis) VALUES('$id_buku','$judul', '$foto', '$penulis', '$penerbit', '$tahun_terbit', '$kategori','$stok', '$keterangan')") or die('Query failed');
     
     if ($add_book_query) {
         move_uploaded_file($foto_tmp_name, $foto_folder);
@@ -160,7 +178,7 @@ if (isset($_POST['update_book'])) {
         ?>
             <form action="admin_buku.php" method="post" enctype="multipart/form-data">
                 <h3>Add Book</h3>
-                <input type="text" name="id_buku" class="box" placeholder="Enter id book title" required>
+                <!-- <input type="text" name="id_buku" class="box" placeholder="Enter id book title" required> -->
                 <input type="text" name="judul" class="box" placeholder="Enter book title" required>
                 <input type="text" name="penulis" class="box" placeholder="Enter author name" required>
                 <input type="text" name="penerbit" class="box" placeholder="Enter publisher name" required>

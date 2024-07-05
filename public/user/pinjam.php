@@ -88,7 +88,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <input type="hidden" name="id_pinjam" value="<?php echo $row['id_pinjam']; ?>">
                   <input type="hidden" name="tanggal_pinjam" value="<?php echo $row['tanggal_pinjam']; ?>">
                   <th scope="row"><?php echo $nomer++; ?></th>
-                  <td><?php echo $row['id_buku']; ?></td>
+                  <?php 
+                    $id_buku = $row['id_buku'];
+                    $query = "SELECT * FROM buku WHERE id_buku = '$id_buku'";
+                    $hasil = mysqli_query($conn, $query);
+                    $buku = mysqli_fetch_assoc($hasil)
+                  ?>
+                  <td><?php echo $buku['judul']; ?></td>
                   <td><?php echo $row['tanggal_pinjam']; ?></td>
                   <?php if($row['tanggal_kembali'] == NULL) { ?>
                     <td><button type="submit" class="btn btn-danger">Kembalikan</button></td>
