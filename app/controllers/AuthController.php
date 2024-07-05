@@ -37,13 +37,12 @@ class AuthController
 
             if ($this->user->create($userData)) {
                 $_SESSION['user_id'] = $akun_id; 
-                echo "Registration successful!";
-                header('Location: /../user/profile.php');
+                $this->showAlert('Register berhasil! Selamat datang, ' . $data['nama'] . '!', '/../user/profile.php');
             } else {
-                echo "User creation failed.";
+                $this->showAlert('Registrasi gagal', '/auth/');
             }
         } else {
-            echo "Account creation failed.";
+            $this->showAlert("Registrasi gagal", '/auth/');
         }
     }
 
@@ -57,15 +56,13 @@ class AuthController
         if ($akun && password_verify($password, $akun['password'])) {
             if ($akun['role'] == 'user') {
                 $_SESSION['user_id'] = $akun['id_akun'];
-                echo "Login successful!";
-                header('Location: /../user/profile.php');
+                $this->showAlert('Login berhasil! Selamat datang, ' . $akun['username'] . '!', '/../user/profile.php');
             } else {
                 $_SESSION['role'] = $akun['role'];
-                echo "Login successful!";
-                header('Location: /../admin/admin_index.php');
+                $this->showAlert('Login berhasil! Selamat datang, ' . $akun['username'] . '!', '/../admin/admin_index.php');
             }
         } else {
-            echo "Invalid username/email or password.";
+            $this->showAlert("Username/email or password salah.", '/auth/');
         }
     }
 
@@ -74,6 +71,15 @@ class AuthController
         session_start();
         session_destroy();
         echo "Logout successful!";
+    }
+
+    private function showAlert($message, $redirectUrl) {
+        // Menampilkan alert menggunakan JavaScript dan kemudian mengalihkan halaman menggunakan meta tag
+        echo '<script type="text/javascript">';
+        echo 'alert("' . $message . '");';
+        echo 'window.location.href = "' . $redirectUrl . '";';
+        echo '</script>';
+        exit;
     }
 }
 ?>
